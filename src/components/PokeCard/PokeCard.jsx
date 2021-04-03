@@ -54,7 +54,7 @@ const PokeCard = () => {
         const Pokemons = await getPokemons();
         setNamePokemon(Pokemons);
       })(),
-    [true]
+    []
   );
 
   return (
