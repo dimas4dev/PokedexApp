@@ -4,7 +4,15 @@ This application has a simple argument. Functioning the same as a Pokedex, it re
 
 ## Demo
 
-Here you will find a demo from challenge
+Here you will find a demo from challenge[Pokedex APP](https://pokedex-app-five.vercel.app/)
+
+## Installation
+
+To install you only need to perform the following steps:
+
+1.  Download the repository found here: [GitHub Repositorie](https://github.com/dimasmendoza/PokedexApp)
+
+2.  Run the **npm run start** script to start the development server
 
 ## Contacto
 
