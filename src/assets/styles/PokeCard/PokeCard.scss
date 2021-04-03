@@ -1,0 +1,50 @@
+.MainContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 20px;
+  .PokeContainer {
+    box-shadow: 10px 25px 30px -7px rgba(10, 10, 10, 0.71);
+    border-radius: 10px;
+    margin: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    .PokeCard {
+      box-shadow: 10px 25px 30px -7px rgba(10, 10, 10, 0.71);
+      width: 100%;
+      height: 60px;
+      border-radius: 10px;
+      margin: 20px;
+      align-content: center;
+      text-align: center;
+      text-transform: capitalize;
+      cursor: pointer;
+    }
+    p {
+      text-align: center;
+    }
+    .PokeCard:hover {
+      -webkit-transform: scale(1.25);
+    }
+  }
+  .PokeInformation {
+    box-shadow: 10px 25px 30px -7px rgba(10, 10, 10, 0.71);
+    border-radius: 10px;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    text-transform: capitalize;
+    img {
+      width: 200px;
+      height: 200px;
+    }
+  }
+  .absolute {
+    position: fixed;
+    top: 15%;
+    left: 60%;
+    width: 400px;
+    height: 550px;
+  }
+}
