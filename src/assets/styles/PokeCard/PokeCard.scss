@@ -48,7 +48,6 @@
   }
   .PokeInformation {
     display: flex;
-    // height: 700px;
     width: 50%;
     margin: 20px;
     box-shadow: 10px 25px 30px -7px rgba(10, 10, 10, 0.71);
@@ -59,6 +58,18 @@
     text-transform: capitalize;
     img {
       width: 150px;
+    }
+  }
+}
+@media screen and (max-width: 475px) {
+  .MainContainer {
+    flex-direction: column-reverse;
+    .PokeContainer {
+      width: 100%;
+    }
+    .PokeInformation {
+      width: 100%;
+      margin: 0;
     }
   }
 }
