@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 import "../../assets/styles/PokeCard/PokeCard.scss";
 
 const PokeCard = () => {
-  const urlPokemons = "https://pokeapi.co/api/v2/";
+  const urlStatic = "https://pokeapi.co/api/v2/";
+  const [urlPokemons, setUrlPokemons] = useState(
+    "https://pokeapi.co/api/v2/pokemon?limit=12&offset=0"
+  );
   const [pokemonName, setNamePokemon] = useState([]);
 
   const [pokemonDescription, setPokemonDescription] = useState({
@@ -15,16 +18,36 @@ const PokeCard = () => {
   });
 
   async function getPokemons() {
-    const jsonPokemons = await fetch(
-      `${urlPokemons}pokemon?offset=0&limit=1118`
-    ).then((response) => response.json());
+    const jsonPokemons = await fetch(`${urlPokemons}`).then((response) =>
+      response.json()
+    );
     const arrayPokemons = [...jsonPokemons.results];
 
     return arrayPokemons;
   }
+
+  async function previousPage() {
+    const urlPrevious = await fetch(urlPokemons).then((response) =>
+      response.json().then((url) => url.previous)
+    );
+
+    if (urlPrevious) {
+      setUrlPokemons(urlPrevious);
+    }
+  }
+  async function nextPage() {
+    const urlNext = await fetch(urlPokemons).then((response) =>
+      response.json().then((url) => url.next)
+    );
+    console.log(urlNext);
+    if (urlNext) {
+      setUrlPokemons(urlNext);
+    }
+  }
+
   async function getPokemonDescription(pokemon) {
     const getDescription = await fetch(
-      `${urlPokemons}pokemon/${pokemon}`
+      `${urlStatic}pokemon/${pokemon}`
     ).then((response) => response.json());
 
     setPokemonDescription({
@@ -43,7 +66,13 @@ const PokeCard = () => {
         key={Pokemon.name}
         onClick={() => getPokemonDescription(Pokemon.name)}
       >
-        {Pokemon.name}
+        <img
+          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+            Pokemon.url.split("/")[6]
+          }.png`}
+          alt=""
+        />
+        <p>{Pokemon.name}</p>
       </div>
     ));
     return listPokemon;
@@ -52,15 +81,32 @@ const PokeCard = () => {
     () =>
       (async () => {
         const Pokemons = await getPokemons();
-        setNamePokemon(Pokemons);
+        if (urlStatic) {
+          setNamePokemon(Pokemons);
+        }
       })(),
-    []
+    [urlPokemons]
   );
 
   return (
     <section className="MainContainer">
       <article className="PokeContainer">
         <PokemonList />
+
+        <div className="PokeContainer__Pages">
+          <div
+            className="PokeContainer__Pages--button"
+            onClick={() => previousPage()}
+          >
+            Previous Page
+          </div>
+          <div
+            className="PokeContainer__Pages--button"
+            onClick={() => nextPage()}
+          >
+            Next Page
+          </div>
+        </div>
       </article>
       <article className="PokeInformation absolute">
         <img src={pokemonDescription.picture} alt="PokeIcons" />
