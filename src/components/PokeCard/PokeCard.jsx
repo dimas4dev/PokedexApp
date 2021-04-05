@@ -86,6 +86,7 @@ const PokeCard = () => {
         }
       })(),
     [urlPokemons]
+    // eslint-disable-next-line
   );
 
   return (
